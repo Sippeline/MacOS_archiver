@@ -1,0 +1,1 @@
+-v --force --timestamp=none --sign - --entitlements /Users/platonkopaev/NewArchiver/final_archiver/obj/Debug/net9.0-maccatalyst/maccatalyst-arm64/Entitlements.xcent /Users/platonkopaev/NewArchiver/final_archiver/bin/Debug/net9.0-maccatalyst/maccatalyst-arm64/final_archiver.app

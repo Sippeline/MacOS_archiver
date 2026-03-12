@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:final_archiver.Converters"
+             x:Class="final_archiver.Views.MainPage"
+             Title="Final Archiver"
+             BackgroundColor="#0F172A">
+    
+    <ContentPage.Resources>
+        <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
+        
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="HeightRequest" Value="48" />
+            <Setter Property="TextColor" Value="White" />
+        </Style>
+        
+        <Style TargetType="Frame">
+            <Setter Property="BackgroundColor" Value="#1E293B" />
+            <Setter Property="BorderColor" Value="#334155" />
+            <Setter Property="CornerRadius" Value="12" />
+            <Setter Property="Padding" Value="16" />
+            <Setter Property="HasShadow" Value="True" />
+        </Style>
+        
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="#E2E8F0" />
+        </Style>
+        
+    </ContentPage.Resources>
+    
+    <ScrollView>
+        <VerticalStackLayout Spacing="16" Padding="20">
+            
+            <VerticalStackLayout Spacing="4">
+                <Label Text="Final Archiver" 
+                       FontSize="28"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       TextColor="#FFFFFF" />
+                
+                <Label Text="Конвейерное сжатие: BWT → MTF → RLE → Huffman"
+                       FontSize="13"
+                       HorizontalOptions="Center"
+                       TextColor="#94A3B8" />
+            </VerticalStackLayout>
+            
+            <Frame>
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Выбор файла из папки архиватора" 
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="#E2E8F0"
+                           Margin="0,0,0,8" />
+                    
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                        <Button Text="📄 Выбрать обычный файл" 
+                                Command="{Binding SelectUncompressedFileCommand}"
+                                Grid.Column="0"
+                                BackgroundColor="#4F46E5"
+                                Opacity="{Binding IsProcessing, Converter={StaticResource InverseBoolConverter}, ConverterParameter=1}" />
+                        
+                        <Button Text="🗜️ Выбрать архив" 
+                                Command="{Binding SelectCompressedFileCommand}"
+                                Grid.Column="1"
+                                BackgroundColor="#7C3AED"
+                                Opacity="{Binding IsProcessing, Converter={StaticResource InverseBoolConverter}, ConverterParameter=1}" />
+                    </Grid>
+                    
+                    <Label Text="Файлы выбираются из папки Documents/FinalArchiver/" 
+                           FontSize="13"
+                           TextColor="#94A3B8"
+                           LineBreakMode="WordWrap" />
+                </VerticalStackLayout>
+            </Frame>
+            
+            <Frame>
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Информация о файле" 
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="#E2E8F0"
+                           Margin="0,0,0,8" />
+                    
+                    <Label Text="{Binding FileInfo}" 
+                           FontSize="14"
+                           TextColor="#CBD5E1"
+                           LineBreakMode="WordWrap" />
+                </VerticalStackLayout>
+            </Frame>
+            
+            <Frame>
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Формат для сохранения" 
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="#E2E8F0"
+                           Margin="0,0,0,8" />
+                    
+                    <Label Text="Выберите формат для сохранения результата:" 
+                           FontSize="14"
+                           TextColor="#94A3B8" />
+                    
+                    <Picker ItemsSource="{Binding CurrentAvailableFormats}"
+                            SelectedItem="{Binding SelectedFormat}"
+                            BackgroundColor="#1E293B"
+                            TextColor="#E2E8F0"
+                            TitleColor="#94A3B8"
+                            FontSize="14"
+                            HeightRequest="45" />
+                    
+                    <Label Text="Для сжатия: формат архива | Для распаковки: формат сохранения файла" 
+                           FontSize="13"
+                           TextColor="#64748B"
+                           LineBreakMode="WordWrap" />
+                    
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                        <Button Text="✓ Применить формат" 
+                                Command="{Binding UpdateFormatCommand}"
+                                Grid.Column="0"
+                                BackgroundColor="#374151"
+                                TextColor="White"
+                                FontSize="13"
+                                FontAttributes="Bold"
+                                CornerRadius="8"
+                                HeightRequest="40" />
+                        
+                        <Button Text="⟳ Обновить путь" 
+                                Command="{Binding UpdateOutputPathCommand}"
+                                Grid.Column="1"
+                                BackgroundColor="#475569"
+                                TextColor="White"
+                                FontSize="13"
+                                FontAttributes="Bold"
+                                CornerRadius="8"
+                                HeightRequest="40" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+            
+            <Frame>
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Сохранение результата" 
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="#E2E8F0"
+                           Margin="0,0,0,8" />
+                    
+                    <Entry Text="{Binding OutputFilePath}"
+                           Placeholder="Путь будет сгенерирован автоматически"
+                           IsReadOnly="True"
+                           BackgroundColor="#1E293B"
+                           TextColor="#E2E8F0"
+                           PlaceholderColor="#64748B"
+                           FontSize="14"
+                           HeightRequest="45" />
+                    
+                    <Label Text="Результаты сохраняются в папку архиватора" 
+                           FontSize="13"
+                           TextColor="#94A3B8"
+                           LineBreakMode="WordWrap" />
+                </VerticalStackLayout>
+            </Frame>
+            
+            <Frame>
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Алгоритм сжатия" 
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="#E2E8F0"
+                           Margin="0,0,0,8" />
+                    
+                    <Picker ItemsSource="{Binding AvailablePipelines}"
+                            ItemDisplayBinding="{Binding Name}"
+                            SelectedItem="{Binding SelectedPipeline}"
+                            BackgroundColor="#1E293B"
+                            TextColor="#E2E8F0"
+                            TitleColor="#94A3B8"
+                            FontSize="14"
+                            HeightRequest="45" />
+                </VerticalStackLayout>
+            </Frame>
+            
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                <Button Text="🗜️ Сжать файл" 
+                        Command="{Binding CompressFileCommand}"
+                        IsEnabled="{Binding IsProcessing, Converter={StaticResource InverseBoolConverter}}"
+                        Grid.Column="0"
+                        BackgroundColor="#059669"
+                        FontSize="15"
+                        FontAttributes="Bold"
+                        CornerRadius="10"
+                        HeightRequest="52"
+                        Opacity="{Binding IsProcessing, Converter={StaticResource InverseBoolConverter}, ConverterParameter=1}" />
+                
+                <Button Text="📤 Распаковать архив" 
+                        Command="{Binding DecompressFileCommand}"
+                        IsEnabled="{Binding IsProcessing, Converter={StaticResource InverseBoolConverter}}"
+                        Grid.Column="1"
+                        BackgroundColor="#2563EB"
+                        FontSize="15"
+                        FontAttributes="Bold"
+                        CornerRadius="10"
+                        HeightRequest="52"
+                        Opacity="{Binding IsProcessing, Converter={StaticResource InverseBoolConverter}, ConverterParameter=1}" />
+            </Grid>
+            
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                <Button Text="📂 Открыть папку архиватора" 
+                        Command="{Binding OpenArchiveFolderCommand}"
+                        Grid.Column="0"
+                        BackgroundColor="#7C3AED"
+                        TextColor="White"
+                        FontSize="14"
+                        FontAttributes="Bold"
+                        CornerRadius="10"
+                        HeightRequest="48" />
+                
+                <Button Text="🔄 Обновить информацию" 
+                        Command="{Binding ValidateInputFileCommand}"
+                        Grid.Column="1"
+                        BackgroundColor="#475569"
+                        TextColor="White"
+                        FontSize="14"
+                        FontAttributes="Bold"
+                        CornerRadius="10"
+                        HeightRequest="48" />
+            </Grid>
+            
+            <Frame BackgroundColor="#1E293B" BorderColor="#334155" CornerRadius="12" Padding="16">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="📊 Детали сжатия" 
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="#FFFFFF"
+                           Margin="0,0,0,4" />
+                    
+                    <Label Text="{Binding CompressionDetails}" 
+                           FontSize="14"
+                           TextColor="#94A3B8"
+                           LineBreakMode="WordWrap" />
+                </VerticalStackLayout>
+            </Frame>
+            
+            <Frame>
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="{Binding StatusMessage}"
+                           HorizontalOptions="Center"
+                           FontAttributes="Bold"
+                           FontSize="15"
+                           LineBreakMode="WordWrap"
+                           TextColor="#FFFFFF" />
+                    
+                    <Label Text="{Binding CurrentOperation}"
+                           HorizontalOptions="Center"
+                           FontSize="13"
+                           TextColor="#94A3B8" />
+                    
+                    <ProgressBar Progress="{Binding ProgressPercentage}" 
+                                 IsVisible="{Binding ShowProgress}"
+                                 ProgressColor="#8B5CF6"
+                                 BackgroundColor="#334155"
+                                 HeightRequest="6" />
+                    
+                    <Label Text="{Binding ProgressPercentage, StringFormat='Прогресс: {0}%'}"
+                           HorizontalOptions="Center"
+                           IsVisible="{Binding ShowProgress}"
+                           FontSize="13"
+                           TextColor="#94A3B8" />
+                </VerticalStackLayout>
+            </Frame>
+            
+            <Label Text="Final Archiver v1.0 | Поддерживает форматы: PNG, JPG, MP3, MP4, WAV, RAW и другие"
+                   FontSize="12"
+                   HorizontalOptions="Center"
+                   TextColor="#64748B"
+                   Margin="0,20,0,0" />
+            
+        </VerticalStackLayout>
+    </ScrollView>
+    
+</ContentPage>

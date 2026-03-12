@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="final_archiver.App"
+             xmlns:converters="clr-namespace:final_archiver.Converters">
+    
+    <Application.Resources>
+        <ResourceDictionary>
+            
+            <converters:InverseBoolConverter x:Key="InverseBoolConverter" />
+            <converters:SizeToReadableConverter x:Key="SizeConverter" />
+            <converters:RatioToColorConverter x:Key="RatioColorConverter" />
+            
+            <Color x:Key="PrimaryColor">#007AFF</Color>
+            <Color x:Key="PrimaryDarkColor">#0056CC</Color>
+            <Color x:Key="SecondaryColor">#5856D6</Color>
+            <Color x:Key="SuccessColor">#34C759</Color>
+            <Color x:Key="ErrorColor">#FF3B30</Color>
+            <Color x:Key="WarningColor">#FF9500</Color>
+            <Color x:Key="InfoColor">#5AC8FA</Color>
+            <Color x:Key="LightInfoColor">#E8F4FD</Color>
+            
+            <Color x:Key="TextColor">#000000</Color>
+            <Color x:Key="SecondaryTextColor">#8E8E93</Color>
+            <Color x:Key="PlaceholderColor">#C7C7CC</Color>
+            
+            <Color x:Key="PageBackgroundColor">#FFFFFF</Color>
+            <Color x:Key="CardBackgroundColor">#FFFFFF</Color>
+            <Color x:Key="LightBackgroundColor">#F8F9FA</Color>
+            <Color x:Key="InputBackgroundColor">#FFFFFF</Color>
+            
+            <Color x:Key="BorderColor">#C7C7CC</Color>
+            <Color x:Key="LightBorderColor">#E5E5EA</Color>
+            <Color x:Key="SeparatorColor">#C8C7CC</Color>
+            
+            <Style TargetType="ContentPage">
+                <Setter Property="BackgroundColor" Value="{DynamicResource PageBackgroundColor}" />
+            </Style>
+            
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="{DynamicResource TextColor}" />
+                <Setter Property="FontSize" Value="14" />
+            </Style>
+            
+            <Style TargetType="Entry">
+                <Setter Property="TextColor" Value="{DynamicResource TextColor}" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource InputBackgroundColor}" />
+                <Setter Property="PlaceholderColor" Value="{DynamicResource PlaceholderColor}" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Margin" Value="0,0,0,5" />
+            </Style>
+            
+            <Style TargetType="Button" x:Key="PrimaryButton">
+                <Setter Property="BackgroundColor" Value="{DynamicResource PrimaryColor}" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Padding" Value="20,12" />
+                <Setter Property="Margin" Value="0,0,0,10" />
+            </Style>
+            
+            <Style TargetType="Button" x:Key="SecondaryButton">
+                <Setter Property="BackgroundColor" Value="{DynamicResource SecondaryColor}" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Padding" Value="20,12" />
+                <Setter Property="Margin" Value="0,0,0,10" />
+            </Style>
+            
+            <Style TargetType="Button" x:Key="SuccessButton">
+                <Setter Property="BackgroundColor" Value="{DynamicResource SuccessColor}" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Padding" Value="20,12" />
+                <Setter Property="Margin" Value="0,0,0,10" />
+            </Style>
+            
+            <Style TargetType="Button" x:Key="InfoButton">
+                <Setter Property="BackgroundColor" Value="{DynamicResource InfoColor}" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Padding" Value="20,12" />
+                <Setter Property="Margin" Value="0,0,0,10" />
+            </Style>
+            
+            <Style TargetType="Button" x:Key="WarningButton">
+                <Setter Property="BackgroundColor" Value="{DynamicResource WarningColor}" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Padding" Value="20,12" />
+                <Setter Property="Margin" Value="0,0,0,10" />
+            </Style>
+            
+            <Style TargetType="Picker">
+                <Setter Property="TextColor" Value="{DynamicResource TextColor}" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource InputBackgroundColor}" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="TitleColor" Value="{DynamicResource SecondaryTextColor}" />
+            </Style>
+            
+            <Style TargetType="ProgressBar">
+                <Setter Property="ProgressColor" Value="{DynamicResource PrimaryColor}" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource LightBorderColor}" />
+                <Setter Property="HeightRequest" Value="10" />
+            </Style>
+            
+            <Style TargetType="ActivityIndicator">
+                <Setter Property="Color" Value="{DynamicResource PrimaryColor}" />
+            </Style>
+            
+            <Style x:Key="SectionTitle" TargetType="Label">
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="{DynamicResource PrimaryColor}" />
+                <Setter Property="Margin" Value="0,0,0,10" />
+            </Style>
+            
+            <Style x:Key="HintText" TargetType="Label">
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="TextColor" Value="{DynamicResource SecondaryTextColor}" />
+                <Setter Property="FontAttributes" Value="Italic" />
+                <Setter Property="Margin" Value="0,5,0,0" />
+            </Style>
+            
+            <Style x:Key="StatusMessage" TargetType="Label">
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="TextColor" Value="{DynamicResource SuccessColor}" />
+                <Setter Property="Margin" Value="0,10,0,10" />
+            </Style>
+            
+        </ResourceDictionary>
+    </Application.Resources>
+    
+</Application>
